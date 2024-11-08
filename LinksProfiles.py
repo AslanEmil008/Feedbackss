@@ -18,7 +18,7 @@ driver.get("https://groover.co/en/")
 time.sleep(2)
 
 # Click the login button using CSS Selector
-login_button_css = driver.find_element(By.CSS_SELECTOR, "span[data-test-id='loginLink']")
+login_button_css = driver.find_element(By.CSS_SELECTOR, "button[data-test-id='loginLink']")
 login_button_css.click()
 
 # Wait for the login page to load
