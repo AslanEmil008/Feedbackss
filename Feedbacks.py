@@ -1,4 +1,4 @@
-from selenium import webdriver
+rom selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 import time
@@ -15,15 +15,26 @@ driver.get("https://groover.co/en/")
 # Wait for the page to load
 time.sleep(2)
 
-# Click the login button using CSS Selector
-login_button_css = driver.find_element(By.CSS_SELECTOR, "span[data-test-id='loginLink']")
-login_button_css.click()
+# Wait for the login button and ensure it's clickable
+login_button = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "button[data-test-id='loginLink']"))
+)
+
+# Scroll the login button into view
+driver.execute_script("arguments[0].scrollIntoView(true);", login_button)
+time.sleep(1)  # Give it a moment to ensure the button is fully in view
+
+# Click the login button using JavaScript if normal click doesn't work
+driver.execute_script("arguments[0].click();", login_button)
+print("Login button clicked.")
 
 # Wait for the login page to load
 time.sleep(2)
 
 # Enter email and password
-email_input = driver.find_element(By.CSS_SELECTOR, "input[data-test-id='loginFormEmailInputField']")
+email_input = WebDriverWait(driver, 10).until(
+    EC.presence_of_element_located((By.CSS_SELECTOR, "input[data-test-id='loginFormEmailInputField']"))
+)
 email_input.send_keys("aspenjadeartist@gmail.com")  # Replace with your email
 
 password_input = driver.find_element(By.CSS_SELECTOR, "input[data-test-id='loginFormPasswordInputField']")
@@ -32,10 +43,10 @@ password_input.send_keys("Scrapy*11")  # Replace with your password
 # Press Enter to log in
 password_input.send_keys(Keys.RETURN)
 
-# Click the login submit button
-login_submit_button = driver.find_element(By.CSS_SELECTOR, "button[data-test-id='loginFormSubmitCTA']")
-login_submit_button.click()
+# Wait for the login to process
 time.sleep(5)
+
+# After login, proceed with feedback scraping
 
 # List of songs to scrape feedback for
 songs = ['BEFORE', 'Obsessed', 'INFINITE', 'Searching', 'Alternate Universes', 'Infinite']
