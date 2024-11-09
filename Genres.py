@@ -3,6 +3,7 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 # Load the CSV file
+#For each song change the csv name wich you have after running LinkesProfiles.py 
 csv_file_path = 'influencer_profilessinf.csv'  # Update with your CSV file path
 df = pd.read_csv(csv_file_path)
 
