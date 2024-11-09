@@ -49,7 +49,8 @@ time.sleep(5)
 
 # Finding the specific song and clicking it for feedback scraping
 obsessed_element = WebDriverWait(driver, 10).until(
-    EC.element_to_be_clickable((By.XPATH, "//span[text()='Infinite']"))
+    EC.element_to_be_clickable((By.XPATH, "//span[text()='Infinite']")) 
+    # In here you only must chnage the song name ['Before','BEFORE',' Obsessed','INFINITE','Searching',' Alternate Universes','Infinite']
 )
 obsessed_element.click()
 
@@ -61,6 +62,7 @@ profiles_data = []
 visited_names = set()  # Set to keep track of processed influencer names
 
 # Function to save profiles to CSV
+# And for every song chnage csv name
 def save_to_csv(profiles, filename='influencer_profiilesinf.csv'):
     with open(filename, mode='w', newline='', encoding='utf-8') as file:
         writer = csv.DictWriter(file, fieldnames=["name", "link"])
